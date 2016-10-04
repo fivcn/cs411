@@ -1,2 +1,7 @@
 # cs411
-project
+Group Members: 
+
+Amanda Doss 
+Lida Karadimou 
+James Jin
+Andy Wang 
