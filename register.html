@@ -1,0 +1,38 @@
+<head>
+    <title>Create an account!</title>
+</head>
+{%if not supress%}
+<h1> Email already in use! Use another one or <a href="/login">login</a></h1>
+{% endif %}
+
+{% if message %}
+  <h4>{{message}}!</h4>
+{% endif %}
+
+
+    <body>
+        <div class="title">
+            <h1>Enter your information below</h1>
+        </div>
+        <div id="content">
+            <form method="post" action="/register">
+                <label for="firstname"><b>Enter your first name:</b></label>
+                <input type="firstname" name="firstname" /><br />
+                <label for="lastname"><b>Enter your last name:</b></label>
+                <input type="lastname" name="lastname" /><br />
+                <label for="dateofbirth"><b>Enter your date of birth:</b></label>
+                <input type="dateofbirth" name="dateofbirth" /><br />
+                <label for="email"><b>Enter your email:</b></label>
+                <input type="email" name="email" /><br />
+                <label for="password"><b>Enter password:</b></label>
+                <input type="password" name="password" /><br />
+                <label for="hometown">Enter your hometown:</label>
+                <input type="hometown" name="hometown" /><br />
+                <label for="gender">Enter your gender:</label>
+                <input type="gender" name="gender" /><br />
+                <input type="submit" />
+            </form>
+            <i>Please enter all information in bold. Note that date of birth should be in the format YYYY-MM-DD. Gender should be a boolean</i>
+         </div>
+    </body>
+<a href='/'>Home</a>
