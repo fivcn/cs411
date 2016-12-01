@@ -31,7 +31,6 @@ CREATE TABLE Recipe
   #INDEX upid_idx (user_id),
   #tag_text VARCHAR(30) REFERENCES Tags(tag_text),
   CONSTRAINT pictures_pk PRIMARY KEY (picture_id),
-  CONSTRAINT pictures_fk2 FOREIGN KEY (album_id) REFERENCES Albums(album_id) ON DELETE CASCADE,
   CONSTRAINT pictures_fk1 FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
   
 );
