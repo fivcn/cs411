@@ -29,9 +29,8 @@ CREATE TABLE Recipe
   imgdata LONGBLOB,
   name VARCHAR(255),
   #INDEX upid_idx (user_id),
-  #tag_text VARCHAR(30) REFERENCES Tags(tag_text),
-  CONSTRAINT pictures_pk PRIMARY KEY (picture_id),
-  CONSTRAINT pictures_fk1 FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+  CONSTRAINT recipe_pk PRIMARY KEY (recipe_id),
+  CONSTRAINT recipe_fk1 FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
   
 );
 
@@ -39,8 +38,8 @@ CREATE TABLE Ingredient
 ( ingredient_id int4 AUTO_INCREMENT,
   recipe_id int4 NOT NULL,
   text VARCHAR(30) NOT NULL,
-  CONSTRAINT tag_pk PRIMARY KEY (ingredient_id),
-  CONSTRAINT tag_fk FOREIGN KEY (recipe_id) REFERENCES Recipe (recipe_id) ON DELETE CASCADE
+  CONSTRAINT ingredient_pk PRIMARY KEY (ingredient_id),
+  CONSTRAINT ingredient_fk FOREIGN KEY (recipe_id) REFERENCES Recipe (recipe_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Comments
@@ -53,5 +52,3 @@ CONSTRAINT comments_pk PRIMARY KEY (comment_id),
 CONSTRAINT comments_fk1 FOREIGN KEY (recipe_id) REFERENCES Recipe (recipe_id) ON DELETE CASCADE,
 CONSTRAINT comments_fk2 FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
-
-#leipei to wrote, review, kai has (ingredient san tag)z
