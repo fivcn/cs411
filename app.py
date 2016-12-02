@@ -203,7 +203,29 @@ def add_recipe():
 
 		
 #end recipe adding code code 	
-	
+
+#recipe searching code (we need to modify app routes according to front end pages)
+@app.route("/recipesearch", methods = ['GET', 'POST'])
+def recipesearch():
+	searchentry = request.form.get('searchentry')
+	allingredients = str(searchentry)
+	ingredients = allingredients.split(' ')
+	empty=[]
+	q="SELECT name FROM Recipe WHERE text = '" + (ingredients[0]) + "'"
+	i=1
+	while i < len(ingredients):
+		q=q+" AND name IN (SELECT name FROM Recipe WHERE text = '" + (ingredients[i]) +"' )"
+		i=i+1
+	return render_template('recipesearch.html', t=searchhelper(q))
+
+def searchhelper(q):
+	cursor = conn.cursor()
+	cursor.execute(q)
+	conn.commit
+	return cursor.fetchall()
+
+#end of searching for recipe code
+
 @app.route("/", methods=['GET'])
 def hello():
 	return render_template('hello.html', message='Welcome to our Recipe Web App!')
