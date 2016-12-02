@@ -184,6 +184,26 @@ def follow_friend():
 	else:
 		return render_template('follow.html')
 
+#add a new recipe, option available for logged in users only
+@app.route('/add', methods=['GET', 'POST'])
+@flask_login.login_required
+def add_recipe():
+	if request.method == 'POST':
+		user_id = getUserIdFromEmail(flask_login.current_user.id)
+		imgfile = request.files['photo']
+		name = request.form.get('name')
+		description = request.form.get('description')
+		photo_data = base64.standard_b64encode(imgfile.read())
+		cursor = conn.cursor()
+		cursor.execute("INSERT INTO Recipe (imgdata, user_id, name, description) VALUES ('{0}', '{1}', '{2}', '{3}' )".format(photo_data,user_id, name, description))
+		conn.commit()
+		return render_template('hello.html', name=flask_login.current_user.id, message='Recipe added!') #, recipes=getUsersRecipes(user_id) )
+	else:
+		return render_template('add.html')
+
+		
+#end recipe adding code code 	
+	
 @app.route("/", methods=['GET'])
 def hello():
 	return render_template('hello.html', message='Welcome to our Recipe Web App!')
