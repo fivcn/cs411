@@ -28,6 +28,7 @@ CREATE TABLE Recipe
   user_id int4,
   imgdata LONGBLOB,
   name VARCHAR(255),
+  description VARCHAR(500),
   #INDEX upid_idx (user_id),
   CONSTRAINT recipe_pk PRIMARY KEY (recipe_id),
   CONSTRAINT recipe_fk1 FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
