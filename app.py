@@ -247,7 +247,7 @@ def addIngredient():  #request.form.get('text').split
 		return render_template("addingredient.html")
 
 #getting all the ingredients according to recipe id
-def getTags(recipe_id):
+def getIngredient(recipe_id):
 	cursor=conn.cursor()
 	cursor.execute("SELECT text FROM Ingredients WHERE recipe_id='{0}'".format(recipe_id))
 	return cursor.fetchall() 
