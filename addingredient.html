@@ -1,0 +1,35 @@
+<!doctype html>
+{% if message %}
+  <h4>{{message}}!</h4>
+{% endif %}
+<!doctype html>
+{% if message2 %}
+  <h4>{{message2}}!</h4>
+{% endif %}
+
+{% if recipes %}
+<h2>your recipes</h2>
+    <ul>
+    {% for recipe in recipes %}
+        <li><img src='data:image/png;base64,{{recipe[0]}} '/></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% if message is none %}
+  <p>You should <a href='/login'>login!</a></p>
+{% else %}
+  <p> Go to <a href='/profile'>profile?</a></p>
+{% endif %}
+<head>
+<title>Add an ingredient!</title>
+</head>
+
+<form method="post" action="/addingredient">
+				<label for="recipe_id">Select recipe by id:</label>
+                <input type="text" name="recipe_id" required='true' /><br />
+				<label for="text"> Write your ingredient</label>
+                <input for="text" name="text" required='true'/> <br />
+                <input type="submit" />
+
+             </form>
+
