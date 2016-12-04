@@ -1,0 +1,21 @@
+
+{% if message %}
+  <h4>{{message}}!</h4>
+{% endif %}
+<head>
+    <title>Add a new recipe!</title>
+</head>
+    <body>
+        <div class="title">
+            <h1>Add a new recipe!</h1>
+        </div>
+            <form method="post" enctype="multipart/form-data" action="/upload">
+                <label for="photo">Select photo:</label>
+                <input type="file" name="photo" required='true' /><br />
+                <label for="name">write the name:</label>
+                <input type="text" name="name" required='true' /><br />
+                <label for="description">write the description:</label>
+                <input type="text" name="caption" required='true' /><br />
+                <input type="submit" value="Add" />
+            </form>
+    </body>
