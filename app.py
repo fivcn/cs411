@@ -264,8 +264,8 @@ def getRecipebyIngredient(text):
 
 
 @app.route("/", methods=['GET'])
-def hello():
-	return render_template('hello.html', message='Welcome to our Recipe Web App!')
+def home():
+	return render_template('home.html', message='Welcome to our Recipe Web App!')
 
 
 
