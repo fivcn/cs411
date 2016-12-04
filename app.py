@@ -226,6 +226,43 @@ def searchhelper(q):
 
 #end of searching for recipe code
 
+@app.route("/addingredient", methods=['GET','POST'])
+@flask_login.login_required
+def addIngredient():  #request.form.get('text').split
+	user_id = getUserIdFromEmail(flask_login.current_user.id)
+	print(user_id)
+	if request.method=='POST':
+		recipe_id = request.form.get('recipe_id')
+		text = request.form.get('text')   #request.form.get('text').split  kai meta size=length(tags) for i in length
+		cursor = conn.cursor()          
+		cursor.execute("SELECT * FROM Recipe WHERE user_id= '{0}' AND recipe_id = '{1}'".format(user_id,recipe_id))
+		if (cursor.fetchone()==None):
+			return render_template("addingredient.html", message="recipe does not exist or is not yours")
+		else:
+			cursor=conn.cursor()
+			cursor.execute("INSERT INTO Ingredient ( text, recipe_id) VALUES ('{0}','{1}')".format( text , recipe_id))
+			conn.commit()
+			return render_template("addingredient.html",message="ingredient added, if you want add another one:")
+	else:
+		return render_template("addingredient.html")
+
+#getting all the ingredients according to recipe id
+def getTags(recipe_id):
+	cursor=conn.cursor()
+	cursor.execute("SELECT text FROM Ingredients WHERE recipe_id='{0}'".format(recipe_id))
+	return cursor.fetchall() 
+
+@app.route("/view_by_ingredient", methods=['GET','POST'])
+def view_by_ingredient():
+	text = request.form.get('text')
+	return render_template("view_by_ingredient.html", recipe=getRecipebyIngredient(text) )
+
+def getRecipebyIngredient(text):
+	cursor = conn.cursor()
+	cursor.execute("SELECT imgdata,name FROM (Recipe INNER JOIN Ingredient ON Recipe.recipe_id = Ingredient.recipe_id) WHERE text= '{0}'".format(text))
+	return cursor.fetchall()
+
+
 @app.route("/", methods=['GET'])
 def hello():
 	return render_template('hello.html', message='Welcome to our Recipe Web App!')
