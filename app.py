@@ -96,7 +96,7 @@ def login():
 @app.route('/logout')
 def logout():
 	flask_login.logout_user()
-	return render_template('hello.html', message='Logged out') 
+	return render_template('home.html', message='Logged out') 
 
 @login_manager.unauthorized_handler
 def unauthorized_handler():
@@ -153,7 +153,7 @@ def register_user():
 		user = User()
 		user.id = email
 		flask_login.login_user(user)
-		return render_template('hello.html', name=firstname, message='Account Created!')
+		return render_template('home.html', name=firstname, message='Account Created!')
 	else:
 		print ("couldn't find all tokens")
 		return flask.redirect(flask.url_for('register',message='ERROR!:User already exist'))
@@ -175,12 +175,12 @@ def follow_friend():
 				conn.commit()
 				cursor.execute("INSERT INTO Follows (user_id1, user_id2) VALUES ('{0}', '{1}')".format(user_id2,user_id1))
 				conn.commit()
-				return render_template('hello.html', name=flask_login.current_user.id, message='Friend Followed!')
+				return render_template('home.html', name=flask_login.current_user.id, message='Friend Followed!')
 			except:
 				print ("already following this person")
 				return render_template('follow.html', message='already following this person!!!!!!')
 		else: 
-			return render_template('hello.html',name=flask_login.current_user.id, message='Sorry, user does not exist')
+			return render_template('home.html',name=flask_login.current_user.id, message='Sorry, user does not exist')
 	else:
 		return render_template('follow.html')
 
@@ -197,7 +197,7 @@ def add_recipe():
 		cursor = conn.cursor()
 		cursor.execute("INSERT INTO Recipe (imgdata, user_id, name, description) VALUES ('{0}', '{1}', '{2}', '{3}' )".format(photo_data,user_id, name, description))
 		conn.commit()
-		return render_template('hello.html', name=flask_login.current_user.id, message='Recipe added!') #, recipes=getUsersRecipes(user_id) )
+		return render_template('home.html', name=flask_login.current_user.id, message='Recipe added!') #, recipes=getUsersRecipes(user_id) )
 	else:
 		return render_template('add.html')
 
