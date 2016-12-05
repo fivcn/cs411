@@ -9,7 +9,7 @@ CREATE TABLE Users
   email varchar(255) UNIQUE NOT NULL,
   password varchar(255) NOT NULL,
   city varchar(255) NOT NULL, 
-  state varchar(2) NOT NULL,
+  state varchar(255) NOT NULL,
   user_id int4  AUTO_INCREMENT,
   CONSTRAINT users_pk PRIMARY KEY (user_id)
 );
@@ -30,8 +30,7 @@ CREATE TABLE Recipe
   user_id int4,
   imgdata LONGBLOB,
   name VARCHAR(255),
-  description VARCHAR(500),
-  #INDEX upid_idx (user_id),
+  description VARCHAR(255),
   CONSTRAINT recipe_pk PRIMARY KEY (recipe_id),
   CONSTRAINT recipe_fk1 FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
   
