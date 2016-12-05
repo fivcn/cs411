@@ -1,6 +1,6 @@
 """
 CS 411 Recipe Web App Project
-(part of the code was adapted from cs 460 project)
+Amanda Doss, Shi Jin, Anran Wang, Lida Karadimou
 """
 
 import flask
