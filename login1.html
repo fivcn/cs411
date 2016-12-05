@@ -129,21 +129,22 @@
             background-image: linear-gradient(top left 90deg, #6ec2e8 0%, #b6e2ff 100%);
         }
             
-        input[type=reset] {
-            float: right;
-            margin-right: 0px;
-            margin-top: 10px;
-            width: 340px;
-            height: 30px;
-            font-size: 10px;
+        label1 {
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+            font-size: 12px;
+            outline: none
+            color: #555;
+            display: inline-block;
+            margin-left: 18px;
+            padding-top: 10px;
             font-weight: bold;
-            color: black;
-            background-color: #ecf2f5;
-            font-size: 11px;
-            color: #444;
-            text-shadow: 0 1px 0 #fff
-        }
-        
+            }
+            
+            
+        a:link    {color: darkred; background-color: transparent; text-decoration: none}
+        a:visited {color: darkorange; background-color: transparent; text-decoration: none}
+        a:hover   {color: red; background-color: transparent; text-decoration: underline}
+        a:active  {color: greenyellow; background-color: transparent; text-decoration: underline}
         body {background-color: black}
         </style>
 
@@ -161,9 +162,10 @@
                         <input type="checkbox"><label class="check" for="checkbox">Keep me logged in</label>
                         <input type="submit" value="Sign up">
                         <input type="submit" value="Login">
-                    <div id="bot">
-                        </div><input type="reset" value="Forgot your passowrd? Clikc here to reset it">
-                    </div>
+                        <a href = ""http://reset.com""> <label1 for="reset">Forgot your password?</label1>
+                        </a>                
+                        </div>
+                    
                 </form>
             </div>
 
