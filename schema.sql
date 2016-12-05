@@ -9,7 +9,7 @@ CREATE TABLE Users
   email varchar(255) UNIQUE NOT NULL,
   password varchar(255) NOT NULL,
   city varchar(255) NOT NULL, 
-  state varchar(255) NOT NULL,
+  state varchar(2) NOT NULL,
   user_id int4  AUTO_INCREMENT,
   CONSTRAINT users_pk PRIMARY KEY (user_id)
 );
