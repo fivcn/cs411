@@ -14,11 +14,11 @@ import os, base64
 
 mysql = MySQL()
 app = Flask(__name__)
-app.secret_key = 'PRIdenkserw15991' #change this
+app.secret_key = 'pass' #change this
 
 #These will need to be changed according to your creditionals
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'PRIdenkserw15991' #change this
+app.config['MYSQL_DATABASE_PASSWORD'] = 'pass' #change this
 app.config['MYSQL_DATABASE_DB'] = 'recipedb'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
