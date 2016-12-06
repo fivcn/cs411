@@ -256,6 +256,11 @@ def getIngredient(recipe_id):
 	cursor.execute("SELECT text FROM Ingredients WHERE recipe_id='{0}'".format(recipe_id))
 	return cursor.fetchall() 
 
+def getUsersRecipes(user_id):
+	cursor = conn.cursor()
+	cursor.execute("SELECT imgdata, recipe_id FROM Recipes WHERE user_id = '{0}'".format(user_id))
+	return cursor.fetchall() #NOTE list of tuples, [(imgdata, pid), ...]
+
 @app.route("/view_by_ingredient", methods=['GET','POST'])
 def view_by_ingredient():
 	text = request.form.get('text')
