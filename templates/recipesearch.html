@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Search By Ingredient</title>
+    </head>
+    
+     {% if test %}
+     {{test}}
+     {% endif %}
+    
+    
+    {% if dataset %}
+<h2>Here are the recipes that are associated with the ingredients you entered</h2>
+    <ul>
+    {% for x,y in dataset %}
+        <li>{{x}}</li>
+        <img src={{y}}>
+
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<body>
+
+<form  action="recipesearch" method="POST">
+<label for="searchentry"><b>Enter the ingredients with space in between:</b></label>
+<input type="text" name="text" required >
+<input type="submit" name="recipesearch" value="Send">
+ 
+</form>
+
+
+
+
+</body>
+</html>

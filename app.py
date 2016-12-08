@@ -7,6 +7,7 @@ import flask
 from flask import Flask, Response, request, render_template, redirect, url_for
 from flaskext.mysql import MySQL
 import flask_login
+import recipeTitle
 
 #for image uploading
 from werkzeug import secure_filename
@@ -14,11 +15,19 @@ import os, base64
 
 mysql = MySQL()
 app = Flask(__name__)
+<<<<<<< Updated upstream
 app.secret_key = 'pass' #change this
 
 #These will need to be changed according to your creditionals
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'pass' #change this
+=======
+app.secret_key = 'cs411group6' #change this
+
+#These will need to be changed according to your creditionals
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'cs411group6' #change this
+>>>>>>> Stashed changes
 app.config['MYSQL_DATABASE_DB'] = 'recipedb'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
@@ -29,12 +38,12 @@ login_manager.init_app(app)
 
 conn = mysql.connect()
 cursor = conn.cursor()
-cursor.execute("SELECT email from Users") 
+cursor.execute("SELECT email from Users")
 users = cursor.fetchall()
 
 def getUserList():
 	cursor = conn.cursor()
-	cursor.execute("SELECT email from Users") 
+	cursor.execute("SELECT email from Users")
 	return cursor.fetchall()
 
 class User(flask_login.UserMixin):
@@ -61,7 +70,7 @@ def request_loader(request):
 	cursor.execute("SELECT password FROM Users WHERE email = '{0}'".format(email))
 	data = cursor.fetchall()
 	pwd = str(data[0][0] )
-	user.is_authenticated = request.form['password'] == pwd 
+	user.is_authenticated = request.form['password'] == pwd
 	return user
 
 
@@ -96,16 +105,16 @@ def login():
 @app.route('/logout')
 def logout():
 	flask_login.logout_user()
-	return render_template('home.html', message='Logged out') 
+	return render_template('home.html', message='Logged out')
 
 @login_manager.unauthorized_handler
 def unauthorized_handler():
-	return render_template('unauth.html') 
+	return render_template('unauth.html')
 
 #you can specify specific methods (GET/POST) in function header instead of inside the functions as seen earlier
 @app.route("/register", methods=['GET'])
 def register():
-	return render_template('register.html', supress=True)  
+	return render_template('register.html', supress=True)
 
 def getUserIdFromEmail(email):
 	cursor = conn.cursor()
@@ -126,7 +135,7 @@ def getUserLastNameFromID(user_id):
 def isEmailUnique(email):
 	#use this to check if a email has already been registered
 	cursor = conn.cursor()
-	if cursor.execute("SELECT email  FROM Users WHERE email = '{0}'".format(email)): 
+	if cursor.execute("SELECT email  FROM Users WHERE email = '{0}'".format(email)):
 		#this means there are greater than zero entries with that email
 		return False
 	else:
@@ -181,7 +190,7 @@ def follow_friend():
 			except:
 				print ("already following this person")
 				return render_template('follow.html', message='already following this person!!!!!!')
-		else: 
+		else:
 			return render_template('home.html',name=flask_login.current_user.id, message='Sorry, user does not exist')
 	else:
 		return render_template('follow.html')
@@ -203,8 +212,8 @@ def add_recipe():
 	else:
 		return render_template('add.html')
 
-		
-#end recipe adding code code 	
+
+#end recipe adding code code
 
 
 #recipe searching code (we need to modify app routes according to front end pages)
@@ -238,7 +247,7 @@ def addIngredient():  #request.form.get('text').split
 	if request.method=='POST':
 		recipe_id = request.form.get('recipe_id')
 		text = request.form.get('text')   #request.form.get('text').split  kai meta size=length(tags) for i in length
-		cursor = conn.cursor()          
+		cursor = conn.cursor()
 		cursor.execute("SELECT * FROM Recipe WHERE user_id= '{0}' AND recipe_id = '{1}'".format(user_id,recipe_id))
 		if (cursor.fetchone()==None):
 			return render_template("addingredient.html", message="recipe does not exist or is not yours")
@@ -254,7 +263,7 @@ def addIngredient():  #request.form.get('text').split
 def getIngredient(recipe_id):
 	cursor=conn.cursor()
 	cursor.execute("SELECT text FROM Ingredients WHERE recipe_id='{0}'".format(recipe_id))
-	return cursor.fetchall() 
+	return cursor.fetchall()
 
 def getUsersRecipes(user_id):
 	cursor = conn.cursor()
@@ -272,14 +281,30 @@ def getRecipebyIngredient(text):
 	return cursor.fetchall()
 
 
+@app.route("/search_by_recipe", methods = ['GET', 'POST'])
+def searchbyrecipe():
+	searchentry = request.form.get('searchentry')
+	results = recipeTitle.recipeTitleIm(searchentry)
+	return render_template(Home.html)
+
+@app.route("/search_for_location", methods = ['GET', 'POST'])
+def searchforlocation():
+	searchentry = request.form.get('searchentry')
+	
+
+
+
+
+
 @app.route("/", methods=['GET'])
 def home():
 	return render_template('home.html', message='Welcome to our Recipe Web App!')
 
 
 
-if __name__ == "__main__":
-	#this is invoked when in the shell  you run 
-	#$ python app.py 
-	app.run(port=5000, debug=True)
 
+
+if __name__ == "__main__":
+	#this is invoked when in the shell  you run
+	#$ python app.py
+	app.run(port=5000, debug=True)

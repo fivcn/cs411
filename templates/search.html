@@ -1,0 +1,445 @@
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Recipe Search</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyAe7aCrX01bisnWefzVaaMTMNtJtHiJBtw",
+            authDomain: "cs411-group6.firebaseapp.com",
+            databaseURL: "https://cs411-group6.firebaseio.com",
+            storageBucket: "",
+            messagingSenderId: "609954744631"
+          };
+          firebase.initializeApp(config);
+        </script>
+        <style>
+            #topBar{
+                background-color: grey;
+            }
+            
+            #menuBar{
+                position: absolute;
+                top: 12%;   
+            }
+            
+            #recipe_search{
+                position: absolute;
+                width: 800px;
+                height: 35px;
+                top: 35px;
+                    
+                font-size: 200%;
+                font-family: fantasy;
+            }
+            
+            #search_results{
+                position: absolute;
+                left: 20%;
+                
+                width: 20%;
+                height: 20%;
+            }
+            
+            div.image{
+                position: fixed;
+                top: 25%;
+                margin: 10px;
+    
+                width: 17%;
+                height: 17%;
+            }
+            
+            div.image:hover{
+                width: 18%;
+                height:18%;
+            }
+            
+            div.image2{
+                position: fixed;
+                top: 25%;
+                left: 20%;
+                margin: 10px;
+      
+                width: 17%;
+                height: 17%;
+            }
+            
+            div.image2:hover{
+                width: 18%;
+                height:18%;
+            }
+            
+            div.image3{
+                position: fixed;
+                top: 25%;
+                left: 40%;
+                margin: 10px;
+       
+                width: 17%;
+                height: 17%;
+            }
+            
+            div.image3:hover{
+                width: 18%;
+                height:18%;
+            }
+            
+            div.image4{
+                position: fixed;
+                top: 25%;
+                left: 60%;
+                margin: 10px;
+   
+                width: 17%;
+                height: 17%;
+            }
+            
+            div.image4:hover{
+                width: 18%;
+                height:18%;
+            }
+            
+            div.image5{
+                position: fixed;
+                top: 25%;
+                left: 80%;
+                margin: 10px;
+
+                width: 17%;
+                height: 17%;
+            }
+            
+            div.image5:hover{
+                width: 18%;
+                height:18%;
+            }
+            
+            div.image6{
+                position: fixed;
+                top: 60%;
+                margin: 10px;
+                
+                width: 17%;
+                height: 17%;
+            }
+            
+            div.image6:hover{
+                width: 18%;
+                height:18%;
+            }
+            
+            div.image7{
+                position: fixed;
+                top: 60%;
+                left: 20%;
+                margin: 10px;
+
+                width: 17%;
+                height: 17%;
+            }
+            
+            div.image7:hover{
+                width: 18%;
+                height:18%;
+            }
+            
+            div.image8{
+                position: fixed;
+                top: 60%;
+                left: 40%;
+                margin: 10px;
+                
+                width: 17%;
+                height: 17%;
+            }
+            
+            div.image8:hover{
+                width: 18%;
+                height:18%;
+            }
+            
+            div.image9{
+                position: fixed;
+                top: 60%;
+                left: 60%;
+                margin: 10px;
+                
+                width: 17%;
+                height: 17%;
+            }
+            
+            div.image9:hover{
+                width: 18%;
+                height:18%;
+            }
+            
+            div.image10{
+                position: fixed;
+                top: 60%;
+                left: 80%;
+                margin: 10px;
+
+                width: 17%;
+                height: 17%;
+            }
+            
+            div.image10:hover{
+                width: 18%;
+                height:18%;
+            }
+            
+            h1 {
+              position: static;
+              
+              left: 0;
+              top: 0%;
+              width: auto;
+              height: 10%;
+              text-align: center;
+              
+              float: left; 
+              color: greenyellow;   
+              background: black;
+              font-family: fantasy;
+              font-size: 300%;
+              border: none; 
+              padding: 15px;
+              margin: 0px; 
+          }
+          
+          h2 {
+              position: relative;
+              
+              width: 300px;
+              height: 60px;
+              text-align: center;
+              
+              float: left; 
+              color: greenyellow;   
+              background: black;
+              font-family: fantasy;
+              font-size: 200%;
+              border: none;
+              padding: 15px;
+              margin: 0px; 
+          }
+          
+          h3 {
+              width: 8%;
+              height: 2%;
+              text-align: center;
+              
+              float: right; 
+              color: greenyellow;   
+              background-image: url("button.jpg");
+              background-size: contain;
+              background-repeat: no-repeat;
+              background-position: center center;
+              font-family: fantasy;
+              font-size: 150%;
+              border: none;
+              padding: 15px;
+              margin: 0px; 
+          }
+          
+          h4 {
+              font-family: fantasy;
+              text-transform: uppercase;
+              margin: 0;
+              font-size: 2rem;
+              white-space: nowrap;
+              color: orange;
+          }
+          
+          p{    
+                margin: 0;
+                font-size: 1rem;
+                color: greenyellow;
+          }
+          
+          b{
+              position: relative;
+              
+              width: 20%;
+              height: 20%;
+          }
+          
+          a {
+              position: relative;
+              
+              top: -90%;
+              right: 0%;
+              z-index: +2;
+          }
+          
+          a:link    {color: darkred; background-color: transparent; text-decoration: none}
+          a:visited {color: darkorange; background-color: transparent; text-decoration: none}
+          a:hover   {color: red; background-color: transparent; text-decoration: underline}
+          a:active  {color: greenyellow; background-color: transparent; text-decoration: underline}
+          
+          img {
+              position: relative;
+              right: 0%;
+              top: 0%;
+              
+              width: 100%;
+              height: 100%;   
+          }
+          
+          body {background-color: black}
+        </style>
+    </head>
+    <body>
+        <div id = "topBar">
+            <h1> Recipe Engine </h1>
+            <form method="post" action="/recipesearch">
+                <input type="search" id="recipe_search" placeholder ="search your recipe here"/>
+            </form>
+            <h3><a href="Sign_in.html">Sign In</a></h3>
+        </div>
+        
+        <div id = "menuBar">
+            <h2> 
+                <img src="button.jpg" alt="" />
+                <a href="Home.html">Home</a>
+            </h2>
+            <h2> 
+                <img src="button.jpg" alt="" />
+                <a href="Add.html">Create</a>
+            </h2>
+        </div>
+        
+        <div class ="image">
+            <a href="cake.jpg">
+                <img src="cake.jpg" alt="" />
+                <h4>
+                    cake:
+                </h4>
+                <p>
+                    xxxxx
+                </p>
+            </a>
+        </div>   
+        
+        <div class ="image2">
+            <a href="cake.jpg">
+                <img src="cake.jpg" alt="" />
+                <h4>
+                    cake:
+                </h4>
+                <p>
+                    xxxxx
+                </p>
+            </a>
+        </div> 
+        
+        <div class ="image3">
+            <a href="cake.jpg">
+                <img src="cake.jpg" alt="" />
+                <h4>
+                    cake:
+                </h4>
+                <p>
+                    xxxxx
+                </p>
+            </a>
+        </div> 
+              
+        <div class ="image4">
+            <a href="cake.jpg">
+                <img src="cake.jpg" alt="" />
+                <h4>
+                    cake:
+                </h4>
+                <p>
+                    xxxxx
+                </p>
+            </a>
+        </div> 
+        
+                
+        <div class ="image5">
+            <a href="cake.jpg">
+                <img src="cake.jpg" alt="" />
+                <h4>
+                    cake:
+                </h4>
+                <p>
+                    xxxxx
+                </p>
+            </a>
+        </div> 
+        
+        <div class ="image6">
+            <a href="cake.jpg">
+                <img src="cake.jpg" alt="" />
+                <h4>
+                    cake:
+                </h4>
+                <p>
+                    xxxxx
+                </p>
+            </a>
+        </div>   
+        
+        <div class ="image7">
+            <a href="cake.jpg">
+                <img src="cake.jpg" alt="" />
+                <h4>
+                    cake:
+                </h4>
+                <p>
+                    xxxxx
+                </p>
+            </a>
+        </div> 
+        
+        <div class ="image8">
+            <a href="cake.jpg">
+                <img src="cake.jpg" alt="" />
+                <h4>
+                    cake:
+                </h4>
+                <p>
+                    xxxxx
+                </p>
+            </a>
+        </div> 
+              
+        <div class ="image9">
+            <a href="cake.jpg">
+                <img src="cake.jpg" alt="" />
+                <h4>
+                    cake:
+                </h4>
+                <p>
+                    xxxxx
+                </p>
+            </a>
+        </div> 
+        
+                
+        <div class ="image10">
+            <a href="cake.jpg">
+                <img src="cake.jpg" alt="" />
+                <h4>
+                    cake:
+                </h4>
+                <p>
+                    xxxxx
+                </p>
+            </a>
+        </div> 
+        
+    </body>
+</html>

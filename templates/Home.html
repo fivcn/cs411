@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Recipe Engine</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyAe7aCrX01bisnWefzVaaMTMNtJtHiJBtw",
+            authDomain: "cs411-group6.firebaseapp.com",
+            databaseURL: "https://cs411-group6.firebaseio.com",
+            storageBucket: "",
+            messagingSenderId: "609954744631"
+          };
+          firebase.initializeApp(config);
+        </script>
+        <style>
+            #topBar{
+                background-color: grey;
+            }
+            
+            #menuBar{
+                position: fixed;
+                top: 12%;  
+                              
+                z-index: -1;
+            }
+            
+            #recipe_search{
+                position: absolute;
+                width: 800px;
+                height: 35px;
+                top: 35px;
+                    
+                font-size: 200%;
+                font-family: fantasy;
+            }
+            
+            div.image1{
+                position: fixed;
+                top: 200px;
+                
+                margin: 2%;
+                width: 500px;
+                height: 300px;
+            }
+            
+            div.image1:hover{
+                width: 520px;
+                height:310px;
+            }
+            
+            div.image2{
+                position: fixed;
+                top: 180px;
+                left: 550px;
+                
+                margin: 2%;
+                width: 300px;
+                height: 180px;
+            }
+            
+            div.image2:hover{
+                width: 310px;
+                height:190px;
+            }
+            
+            div.image3{
+                position: fixed;
+                top: 440px;
+                left: 550px;
+                
+                margin: 2%;
+                width: 300px;
+                height: 180px;
+            }
+            
+            div.image3:hover{
+                width: 310px;
+                height:190px;
+            }
+            
+            div.image4{
+                position: fixed;
+                top: 180px;
+                left: 900px;
+                
+                margin: 2%;
+                width: 300px;
+                height: 180px;
+            }
+            
+            div.image4:hover{
+                width: 310px;
+                height:190px;
+            }
+            
+            div.image5{
+                position: fixed;
+                top: 440px;
+                left: 900px;
+                
+                margin: 2%;
+                width: 300px;
+                height: 180px;
+            }
+            
+            div.image5:hover{
+                width: 310px;
+                height:190px;
+            }
+            
+          h1 {
+              position: static;
+              
+              left: 0;
+              top: 0%;
+              width: auto;
+              height: 10%;
+              text-align: center;
+              
+              float: left; 
+              color: greenyellow;   
+              background: black;
+              font-family: fantasy;
+              font-size: 300%;
+              border: none; 
+              padding: 15px;
+              margin: 0px; 
+          }
+          
+          h2 {
+              position: relative;
+              
+              width: 300px;
+              height: 60px;
+              text-align: center;
+              
+              float: left; 
+              color: greenyellow;   
+              background: black;
+              font-family: fantasy;
+              font-size: 200%;
+              border: none;
+              padding: 15px;
+              margin: 0px; 
+          }
+          
+          h3 {
+              width: 8%;
+              height: 2%;
+              text-align: center;
+              
+              float: right; 
+              color: greenyellow;   
+              background-image: url("button.jpg");
+              background-size: contain;
+              background-repeat: no-repeat;
+              background-position: center center;
+              font-family: fantasy;
+              font-size: 150%;
+              border: none;
+              padding: 15px;
+              margin: 0px; 
+          }
+          
+          h4 {
+              font-family: fantasy;
+              text-transform: uppercase;
+              margin: 0;
+              font-size: 2rem;
+              white-space: nowrap;
+              color: orange;
+          }
+          
+          p{    
+                margin: 0;
+                font-size: 1rem;
+                color: greenyellow;
+          }
+          
+          a {
+              position: relative;
+              
+              top: -90%;
+              right: 0%;
+              z-index: +2;
+          }
+          
+          a:link    {color: darkred; background-color: transparent; text-decoration: none}
+          a:visited {color: darkorange; background-color: transparent; text-decoration: none}
+          a:hover   {color: red; background-color: transparent; text-decoration: underline}
+          a:active  {color: greenyellow; background-color: transparent; text-decoration: underline}
+          
+          img {
+              position: relative;
+              right: 0%;
+              top: 0%;
+              
+              width: 100%;
+              height: 100%;   
+          }
+          
+          ul {
+              position: relative;
+              
+              left: 10%;
+              top: 0;
+              
+              width: 20px;
+              text-align: center;
+          }
+          
+          body {background-color: black}
+        </style>
+    </head>
+    <body>
+        <div id = "topBar">
+            <h1> Recipe Engine </h1>
+            <form method="post" action="/recipesearch">
+                <input type="search" id="recipe_search" placeholder ="search your recipe here"/>
+            </form>
+            <h3><a href="Sign in.html">Sign In</a></h3>
+        </div>
+        
+        <div id = "menuBar">
+            <h2> 
+                <img src="button.jpg" alt="" />
+                <a href="Home.html">Home</a>
+            </h2>
+            <h2> 
+                <img src="button.jpg" alt="" />
+                <a href="Add.html">Create</a>
+            </h2>
+        </div>
+        
+        <div class="image1">
+            <a target="_blank" href="pasta.jpg">
+                <img src="pasta.jpg" alt="pasta" width="300" height="200">
+            </a>
+            <h4>
+                Pasta:
+            </h4>
+            <p>
+                xxxxx
+            </p>
+        </div>
+        
+        <div class="image2">
+            <a target="_blank" href="steak.jpg">
+                <img src="steak.jpg" alt="steak" width="300" height="200">
+            </a>
+            <h4>
+                steak:
+            </h4>
+            <p>
+                xxxxx
+            </p>
+        </div>
+        
+        <div class="image3">
+            <a target="_blank" href="cake.jpg">
+                <img src="cake.jpg" alt="cake" width="300" height="200">
+            </a>
+            <h4>
+                cake:
+            </h4>
+            <p>
+                xxxxx
+            </p>
+        </div>
+        
+        <div class="image4">
+            <a target="_blank" href="salad.jpg">
+                <img src="salad.jpg" alt="salad" width="300" height="200">
+            </a>
+            <h4>
+                salad:
+            </h4>
+            <p>
+                xxxxx
+            </p>
+        </div>
+        
+        <div class="image5">
+            <a target="_blank" href="turkey.jpg">
+                <img src="turkey.jpg" alt="turkey" width="300" height="200">
+            </a>
+            <h4>
+                turkey:
+            </h4>
+            <p>
+                xxxxx
+            </p>
+        </div>
+
+    </body>
+</html>
