@@ -22,11 +22,11 @@ app.secret_key = 'pass' #change this
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'pass' #change this
 =======
-app.secret_key = 'cs411group6' #change this
+app.secret_key = 'pass' # dummy password change this
 
 #These will need to be changed according to your creditionals
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'cs411group6' #change this
+app.config['MYSQL_DATABASE_PASSWORD'] = 'pass' #change this
 >>>>>>> Stashed changes
 app.config['MYSQL_DATABASE_DB'] = 'recipedb'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
